@@ -29,7 +29,8 @@
         //database methods
         function save()
         {
-
+            $GLOBALS['DB']->exec("INSERT INTO authors (name) VALUES ('{$this->getName()}');");
+            $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
         function update($new_name)
@@ -56,12 +57,20 @@
         //static methods
         static function getAll()
         {
-
+            $authors_query = $GLOBALS['DB']->query("SELECT * FROM authors;");
+            $all_authors = array();
+            foreach ($authors_query as $author) {
+                $name = $author['name'];
+                $id = $author['id'];
+                $new_author = new Author($name, $id);
+                array_push($all_authors, $new_author);
+            }
+            return $all_authors;
         }
 
         static function deleteAll()
         {
-
+            $GLOBALS['DB']->exec("DELETE FROM authors;");
         }
 
         static function find()
