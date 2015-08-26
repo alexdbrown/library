@@ -41,7 +41,11 @@
         //database methods
         function save()
         {
-
+            $GLOBALS['DB']->exec("INSERT INTO books (title, genre) VALUES(
+                '{$this->getTitle()}',
+                '{$this->getGenre()}'
+            );");
+            $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
         function update($new_name)
@@ -68,12 +72,21 @@
         //static methods
         static function getAll()
         {
-
+            $books_query = $GLOBALS['DB']->query("SELECT * FROM books;");
+            $all_books = array();
+            foreach ($books_query as $book) {
+                $title = $book['title'];
+                $genre = $book['genre'];
+                $id = $book['id'];
+                $new_book = new Book($title, $genre, $id);
+                array_push($all_books, $new_book);
+            }
+            return $all_books;
         }
 
         static function deleteAll()
         {
-
+            $GLOBALS['DB']->exec("DELETE FROM books;");
         }
 
         static function find()

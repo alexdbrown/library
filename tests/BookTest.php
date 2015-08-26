@@ -23,7 +23,7 @@
         function test_getTitle()
         {
             //Arrange
-            $title = "Whimsical Fairytales, and other stories";
+            $title = "Whimsical Fairytales and other stories";
             $genre = "Fantasy";
             $test_book = new Book($title, $genre);
 
@@ -37,7 +37,7 @@
         function test_getGenre()
         {
             //Arrange
-            $title = "Whimsical Fairytales, and other stories";
+            $title = "Whimsical Fairytales and other stories";
             $genre = "Fantasy";
             $test_book = new Book($title, $genre);
 
@@ -66,7 +66,7 @@
         function test_getAll()
         {
             //Arrange
-            $title = "Whimsical Fairytales, and Other Stories";
+            $title = "Whimsical Fairytales and Other Stories";
             $genre = "Fantasy";
             $test_book = new Book($title, $genre);
             $test_book->save();
@@ -74,7 +74,7 @@
             $title2 = "The Secret Life of Garden Gnomes";
             $genre2 = "Nonfiction";
             $test_book2 = new Book($title2, $genre2);
-            $test_book->save();
+            $test_book2->save();
 
             //Act
             $result = Book::getAll();
@@ -86,7 +86,7 @@
         function test_deleteAll()
         {
             //Arrange
-            $title = "Whimsical Fairytales, and Other Stories";
+            $title = "Whimsical Fairytales and Other Stories";
             $genre = "Fantasy";
             $test_book = new Book($title, $genre);
             $test_book->save();
