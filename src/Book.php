@@ -46,6 +46,9 @@
                 '{$this->getGenre()}'
             );");
             $this->id = $GLOBALS['DB']->lastInsertId();
+
+            //make an initial copy in copies table
+            $GLOBALS['DB']->exec("INSERT INTO copies (book_id) VALUES ({$this->getId()});");
         }
 
         // method allows librarian to update both name and genre for a book
@@ -88,14 +91,27 @@
         }
 
         // books - copies methods
-        function addCopies()
+        function addCopies($number_of_copies)
         {
+            for($i = 1; $i <= $number_of_copies; $i++) {
+                $GLOBALS['DB']->exec("INSERT INTO copies (book_id) VALUES ({$this->getId()});");
+            }
 
         }
 
         function getCopyIds()
         {
-
+            $copies_query = $GLOBALS['DB']->query("SELECT * FROM copies WHERE book_id = {$this->getId()};");
+            $matching_copies = array();
+            foreach ($copies_query as $copy) {
+                // $book_id = $copy['book_id'];
+                $title = $this->getTitle();
+                $genre = $this->getGenre();
+                $id = $this->getId();
+                $new_book = new Book($title, $genre, $id);
+                array_push($matching_copies, $new_book);
+            }
+            return $matching_copies;
         }
 
         //static methods
