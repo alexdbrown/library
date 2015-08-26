@@ -94,7 +94,7 @@
             $title2 = "The Secret Life of Garden Gnomes";
             $genre2 = "Nonfiction";
             $test_book2 = new Book($title2, $genre2);
-            $test_book->save();
+            $test_book2->save();
 
             //Act
             Book::deleteAll();
@@ -115,7 +115,7 @@
             $title2 = "The Secret Life of Garden Gnomes";
             $genre2 = "Nonfiction";
             $test_book2 = new Book($title2, $genre2);
-            $test_book->save();
+            $test_book2->save();
 
             //Act
             $result = Book::find($test_book->getId());
@@ -138,6 +138,27 @@
 
             //Assert
             $this->assertEquals($new_title, $test_book->getTitle());
+        }
+
+        function test_delete()
+        {
+            //Arrange
+            $title = "Whimsical Fairytales...and other stories";
+            $genre = "Fantasy";
+            $test_book = new Book($title, $genre);
+            $test_book->save();
+
+            $title2 = "The Secret Life of Garden Gnomes";
+            $genre2 = "Nonfiction";
+            $test_book2 = new Book($title2, $genre2);
+            $test_book2->save();
+
+            //Act
+            $test_book->delete();
+
+            //Assert
+            $result = Book::getAll();
+            $this->assertEquals($test_book2, $result[0]);
         }
     }
 
