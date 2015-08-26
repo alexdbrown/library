@@ -15,27 +15,27 @@
         //getters and setters
         function getName()
         {
-
+            return $this->name;
         }
 
         function setName($new_name)
         {
-
+            $this->name = $new_name;
         }
 
         function getPhone()
         {
-
+            return $this->phone;
         }
 
-        function setPhone($phone)
+        function setPhone($new_phone)
         {
-
+            $this->phone = $new_phone;
         }
 
         function getId()
         {
-
+            return $this->id;
         }
 
         //database methods
@@ -67,7 +67,7 @@
 
         static function find()
         {
-            
+
         }
     }
 ?>
