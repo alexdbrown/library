@@ -136,5 +136,50 @@
             $result = Author::getAll();
             $this->assertEquals($test_author2, $result[0]);
         }
+
+        function test_addBook()
+        {
+            //Arrange
+            $title = "Theory of Everything and Nothing at All";
+            $genre = "Nonsense";
+            $test_book = new Book($title, $genre);
+            $test_book->save();
+
+            $name = "Pladoh";
+            $test_author = new Author($name);
+            $test_author->save();
+
+            //Act
+            $test_author->addBook($test_book);
+
+            //Assert
+            $this->assertEquals($test_author->getBooks(), [$test_book]);
+        }
+
+        function test_getBooks()
+        {
+            //Arrange
+            $name = "Pladoh";
+            $test_author = new Author($name);
+            $test_author->save();
+
+            $title = "Theory of Everything and Nothing at All";
+            $genre = "Nonsense";
+            $test_book = new Book($title, $genre);
+            $test_book->save();
+
+            $title2 = "Philosoraptor: A Memoir";
+            $genre2 = "Alternate History/Dinosaurs";
+            $test_book2 = new Book($title, $genre);
+            $test_book2->save();
+
+            //Act
+            $test_author->addBook($test_book);
+            $test_author->addBook($test_book2);
+
+            //Assert
+            $this->assertEquals($test_author->getBooks(), [$test_book, $test_book2]);
+
+        }
     }
  ?>

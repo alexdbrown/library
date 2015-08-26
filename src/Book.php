@@ -48,6 +48,7 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
+        // method allows librarian to update both name and genre for a book
         function update($column_to_update, $new_info)
         {
             $GLOBALS['DB']->exec("UPDATE books SET {$column_to_update} = '{$new_info}' WHERE id = {$this->getId()};");

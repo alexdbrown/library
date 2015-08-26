@@ -124,6 +124,7 @@
             $this->assertEquals($test_book, $result);
         }
 
+        // test that update method is working for name
         function test_updateName()
         {
             //Arrange
@@ -143,6 +144,7 @@
             $this->assertEquals("Generic Fantasy Novel", $result[0]->getTitle());
         }
 
+        // test that update method is working for genre
         function test_updateGenre()
         {
             //Arrange
