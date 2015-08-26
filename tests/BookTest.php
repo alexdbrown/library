@@ -47,6 +47,62 @@
             //Assert
             $this->assertEquals($genre, $result);
         }
+
+        function test_save()
+        {
+            //Arrange
+            $title = "Whimsical Fairytales, and other stories";
+            $genre = "Fantasy";
+            $test_book = new Book($title, $genre);
+
+            //Act
+            $test_book->save();
+
+            //Assert
+            $result = Book::getAll();
+            $this->assertEquals($test_book, $result[0]);
+        }
+
+        function test_getAll()
+        {
+            //Arrange
+            $title = "Whimsical Fairytales, and Other Stories";
+            $genre = "Fantasy";
+            $test_book = new Book($title, $genre);
+            $test_book->save();
+
+            $title2 = "The Secret Life of Garden Gnomes";
+            $genre2 = "Nonfiction";
+            $test_book2 = new Book($title2, $genre2);
+            $test_book->save();
+
+            //Act
+            $result = Book::getAll();
+
+            //Assert
+            $this->assertEquals([$test_book, $test_book2], $result);
+        }
+
+        function test_deleteAll()
+        {
+            //Arrange
+            $title = "Whimsical Fairytales, and Other Stories";
+            $genre = "Fantasy";
+            $test_book = new Book($title, $genre);
+            $test_book->save();
+
+            $title2 = "The Secret Life of Garden Gnomes";
+            $genre2 = "Nonfiction";
+            $test_book2 = new Book($title2, $genre2);
+            $test_book->save();
+
+            //Act
+            Book::deleteAll();
+
+            //Assert
+            $result = Book::getAll();
+            $this->assertEquals([], $result);
+        }
     }
 
  ?>
