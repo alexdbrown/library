@@ -62,12 +62,29 @@
         //Author interaction methods
         function addAuthor($new_author)
         {
-
+            $GLOBALS['DB']->exec("INSERT INTO books_authors (book_id, author_id) VALUES (
+                {$this->getId()},
+                {$new_author->getId()}
+            );");
         }
 
         function getAuthors()
         {
-
+            $authors_query = $GLOBALS['DB']->query(
+                "SELECT authors.* FROM
+                    books JOIN books_authors ON (books_authors.book_id = books.id)
+                          JOIN authors       ON (books_authors.author_id = authors.id)
+                WHERE books.id = {$this->getId()};
+                "
+            );
+            $matching_authors = array();
+            foreach ($authors_query as $author) {
+                $name = $author['name'];
+                $id = $author['id'];
+                $new_author = new Author($name, $id);
+                array_push($matching_authors, $new_author);
+            }
+            return $matching_authors;
         }
 
         //static methods

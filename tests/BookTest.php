@@ -184,6 +184,49 @@
             $result = Book::getAll();
             $this->assertEquals($test_book2, $result[0]);
         }
+
+        function test_addAuthor()
+        {
+            //Arrange
+            $name = "Giacomo Bordello";
+            $test_author = new Author($name);
+            $test_author->save();
+
+            $title = "Clarinet Seduction";
+            $genre = "Romance";
+            $test_book = new Book($title, $genre);
+            $test_book->save();
+
+            //Act
+            $test_book->addAuthor($test_author);
+
+            //Assert
+            $this->assertEquals($test_book->getAuthors(), [$test_author]);
+        }
+
+        function test_getAuthors()
+        {
+            //Arrange
+            $name = "Giacomo Bordello";
+            $test_author = new Author($name);
+            $test_author->save();
+
+            $name2 = "Dude Guy";
+            $test_author2 = new Author($name2);
+            $test_author2->save();
+
+            $title = "Clarinet Seduction";
+            $genre = "Romance";
+            $test_book = new Book($title, $genre);
+            $test_book->save();
+
+            //Act
+            $test_book->addAuthor($test_author);
+            $test_book->addAuthor($test_author2);
+
+            //Assert
+            $this->assertEquals($test_book->getAuthors(), [$test_author, $test_author2]);
+        }
     }
 
  ?>
