@@ -47,12 +47,12 @@
 
         function update($column_to_update, $new_info)
         {
-
+            $GLOBALS['DB']->exec("UPDATE patrons SET {$column_to_update} = '{$new_info}' WHERE id = {$this->getId()};");
         }
 
         function delete()
         {
-
+            $GLOBALS['DB']->exec("DELETE FROM patrons WHERE id = {$this->getId()};");
         }
 
         //static methods
