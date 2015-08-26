@@ -32,7 +32,20 @@
 
             //Assert
             $this->assertEquals($title, $result);
+        }
 
+        function test_getGenre()
+        {
+            //Arrange
+            $title = "Whimsical Fairytales, and other stories";
+            $genre = "Fantasy";
+            $test_book = new Book($title, $genre);
+
+            //Act
+            $result = $test_book->getGenre();
+
+            //Assert
+            $this->assertEquals($genre, $result);
         }
     }
 
