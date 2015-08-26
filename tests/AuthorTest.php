@@ -20,7 +20,6 @@
         //     Author::deleteAll();
         //     Book::deleteAll();
         // }
-    }
 
         function test_getName()
         {
@@ -34,7 +33,5 @@
             //Assert
             $this->assertEquals($name, $result);
         }
-
-
-
+    }
  ?>
