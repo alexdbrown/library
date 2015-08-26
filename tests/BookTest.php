@@ -123,6 +123,22 @@
             //Assert
             $this->assertEquals($test_book, $result);
         }
+
+        function test_update()
+        {
+            //Arrange
+            $title = "Whimsical Fairytales...and other stories";
+            $genre = "Fantasy";
+            $test_book = new Book($title, $genre);
+            $test_book->save();
+
+            //Act
+            $new_title = "Generic Fantasy Novel";
+            $test_book->update($new_title);
+
+            //Assert
+            $this->assertEquals($new_title, $test_book->getTitle());
+        }
     }
 
  ?>
