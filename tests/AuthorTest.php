@@ -6,7 +6,7 @@
     */
 
     require_once "src/Author.php";
-    // require_once "src/Book.php";
+    require_once "src/Book.php";
 
     $server = 'mysql:host=localhost;dbname=library_test';
     $username = 'root';
@@ -18,7 +18,7 @@
         protected function tearDown()
         {
             Author::deleteAll();
-            // Book::deleteAll();
+            Book::deleteAll();
         }
 
         function test_getName()

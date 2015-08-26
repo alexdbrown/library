@@ -47,12 +47,30 @@
         //Book interaction methods
         function addBook($book)
         {
-
+            $GLOBALS['DB']->exec("INSERT INTO books_authors (book_id, author_id) VALUES (
+                {$book->getId()},
+                {$this->getId()}
+            );");
         }
 
         function getBooks()
         {
-
+            $books_query = $GLOBALS['DB']->query(
+                "SELECT books.* FROM
+                    authors JOIN books_authors ON (books_authors.author_id = authors.id)
+                            JOIN books         ON (books_authors.book_id = books.id)
+                WHERE authors.id = {$this->getId()};
+                "
+            );
+            $matching_books = array();
+            foreach ($books_query as $book)  {
+                $title = $book['title'];
+                $genre = $book['genre'];
+                $id = $book['id'];
+                $new_book = new Book($title, $genre, $id);
+                array_push($matching_books, $new_book);
+            }
+            return $matching_books;
         }
 
         //static methods

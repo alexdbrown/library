@@ -4,7 +4,7 @@
     * @backupStaticAttributes disabled
     */
 
-    //require_once "src/Author.php";
+    require_once "src/Author.php";
     require_once "src/Book.php";
 
     $server = 'mysql:host=localhost;dbname=library_test';
@@ -16,7 +16,7 @@
     {
         protected function tearDown()
         {
-            //Author::deleteAll();
+            Author::deleteAll();
             Book::deleteAll();
         }
 
