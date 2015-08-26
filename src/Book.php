@@ -87,6 +87,17 @@
             return $matching_authors;
         }
 
+        // books - copies methods
+        function addCopies()
+        {
+
+        }
+
+        function getCopyIds()
+        {
+
+        }
+
         //static methods
         static function getAll()
         {
@@ -105,6 +116,7 @@
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM books;");
+            $GLOBALS['DB']->exec("DELETE FROM books_authors;");
         }
 
         static function find($search_id)

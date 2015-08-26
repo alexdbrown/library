@@ -227,6 +227,39 @@
             //Assert
             $this->assertEquals($test_book->getAuthors(), [$test_author, $test_author2]);
         }
+
+        //test for method that adds another copy to an already existing book
+        function test_addCopies()
+        {
+            //Arrange
+            $title = "Gardening with Phil";
+            $genre = "Informational/How-To";
+            $test_book = new Book($title, $genre);
+            $test_book->save();
+
+            //Act
+            $test_book->addCopies(1);
+
+            //Assert
+            $result = $test_book->getCopyIds();
+            $this->assertEquals(2, count($result));
+        }
+
+        function test_getCopyIds()
+        {
+            //Arrange
+            $title = "Gardening with Phil";
+            $genre = "Informational/How-To";
+            $test_book = new Book($title, $genre);
+            $test_book->save();
+            $test_book->addCopies(2);
+
+            //Act
+            $result = $test_book->getCopyIds();
+
+            //Assert
+            $this->assertEquals([$test_book, $test_book, $test_book], $result);
+        }
     }
 
  ?>
