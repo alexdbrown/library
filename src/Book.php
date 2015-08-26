@@ -60,6 +60,8 @@
         function delete()
         {
             $GLOBALS['DB']->exec("DELETE FROM books WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM copies WHERE book_id = {$this->getId()};");
+
         }
 
         //Author interaction methods
@@ -99,6 +101,9 @@
 
         }
 
+        // this makes a book for every copy, although it probably doesn't need to because
+        // a list of some number of books with the same title and genre isn't really useful
+        // to a librarian
         function getCopyIds()
         {
             $copies_query = $GLOBALS['DB']->query("SELECT * FROM copies WHERE book_id = {$this->getId()};");
@@ -133,6 +138,8 @@
         {
             $GLOBALS['DB']->exec("DELETE FROM books;");
             $GLOBALS['DB']->exec("DELETE FROM books_authors;");
+            $GLOBALS['DB']->exec("DELETE FROM copies;");
+
         }
 
         static function find($search_id)
