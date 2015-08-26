@@ -104,7 +104,7 @@
         // this makes a book for every copy, although it probably doesn't need to because
         // a list of some number of books with the same title and genre isn't really useful
         // to a librarian
-        function getCopyIds()
+        function getCopies()
         {
             $copies_query = $GLOBALS['DB']->query("SELECT * FROM copies WHERE book_id = {$this->getId()};");
             $matching_copies = array();

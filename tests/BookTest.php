@@ -241,11 +241,11 @@
             $test_book->addCopies(1);
 
             //Assert
-            $result = $test_book->getCopyIds();
+            $result = $test_book->getCopies();
             $this->assertEquals(2, count($result));
         }
 
-        function test_getCopyIds()
+        function test_getCopies()
         {
             //Arrange
             $title = "Gardening with Phil";
@@ -255,7 +255,7 @@
             $test_book->addCopies(2);
 
             //Act
-            $result = $test_book->getCopyIds();
+            $result = $test_book->getCopies();
 
             //Assert
             $this->assertEquals([$test_book, $test_book, $test_book], $result);
