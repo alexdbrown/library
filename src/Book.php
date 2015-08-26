@@ -48,14 +48,15 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
-        function update($new_name)
+        function update($new_title)
         {
-
+            $GLOBALS['DB']->exec("UPDATE books SET title = '{$new_title}' WHERE id = {$this->getId()};");
+            $this->setTitle($new_title);
         }
 
         function delete()
         {
-
+            $GLOBALS['DB']->exec("DELETE FROM books WHERE id = {$this->getId()};");
         }
 
         //Author interaction methods
@@ -89,9 +90,16 @@
             $GLOBALS['DB']->exec("DELETE FROM books;");
         }
 
-        static function find()
+        static function find($search_id)
         {
-
+            $found_book = null;
+            $all_books = Book::getAll();
+            foreach ($all_books as $book) {
+                if ($book->getId() == $search_id) {
+                    $found_book = $book;
+                }
+            }
+            return $found_book;
         }
     }
 ?>
