@@ -88,6 +88,26 @@
             $result = Patron::getAll();
             $this->assertEquals([], $result);
         }
+
+        function test_find()
+        {
+            //Arrange
+            $name = "Suzie Palloozi";
+            $phone = "1-800-439-0398";
+            $test_patron = new Patron($name, $phone);
+            $test_patron->save();
+
+            $name2 = "Tac Zoltani";
+            $phone2 = "1-800-407-3930";
+            $test_patron2 = new Patron($name2, $phone2);
+            $test_patron2->save();
+
+            //Act
+            $result = Patron::find($test_patron2->getId());
+
+            //Assert
+            $this->assertEquals($test_patron2, $result);
+        }
     }
 
  ?>
