@@ -15,27 +15,27 @@
         //getters and setters
         function getTitle()
         {
-
+            return $this->title;
         }
 
         function setTitle($new_title)
         {
-
+            $this->title = (string) $new_title;
         }
 
         function getGenre()
         {
-
+            return $this->genre;
         }
 
         function setGenre($new_genre)
         {
-
+            $this->genre = (string) $new_genre;
         }
 
         function getId()
         {
-
+            return $this->id;
         }
 
         //database methods
