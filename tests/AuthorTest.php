@@ -102,5 +102,39 @@
             //Assert
             $this->assertEquals($test_author, $result);
         }
+
+        function test_update()
+        {
+            //Arrange
+            $name = "Ashlin Aronin";
+            $test_author = new Author($name);
+            $test_author->save();
+
+            //Act
+            $new_name = "Sassy Ash";
+            $test_author->update($new_name);
+
+            //Assert
+            $this->assertEquals($test_author, $test_author->getName());
+        }
+
+        function test_delete()
+        {
+            //Arrange
+            $name = "Ashlin Aronin";
+            $test_author = new Author($name);
+            $test_author->save();
+
+            $name2 = "Vincent Adultman";
+            $test_author2 = new Author($name2);
+            $test_author2->save();
+
+            //Act
+            $test_author->delete();
+
+            //Assert
+            $result = Author::getAll();
+            $this->assertEquals($test_author2, $result[0]);
+        }
     }
  ?>
