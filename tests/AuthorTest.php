@@ -115,7 +115,7 @@
             $test_author->update($new_name);
 
             //Assert
-            $this->assertEquals($test_author, $test_author->getName());
+            $this->assertEquals($new_name, $test_author->getName());
         }
 
         function test_delete()
