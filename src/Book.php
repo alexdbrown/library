@@ -48,10 +48,9 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
-        function update($new_title)
+        function update($column_to_update, $new_info)
         {
-            $GLOBALS['DB']->exec("UPDATE books SET title = '{$new_title}' WHERE id = {$this->getId()};");
-            $this->setTitle($new_title);
+            $GLOBALS['DB']->exec("UPDATE books SET {$column_to_update} = '{$new_info}' WHERE id = {$this->getId()};");
         }
 
         function delete()

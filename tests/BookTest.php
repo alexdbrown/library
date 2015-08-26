@@ -124,7 +124,7 @@
             $this->assertEquals($test_book, $result);
         }
 
-        function test_update()
+        function test_updateName()
         {
             //Arrange
             $title = "Whimsical Fairytales...and other stories";
@@ -132,12 +132,34 @@
             $test_book = new Book($title, $genre);
             $test_book->save();
 
+            $column_to_update = "title";
+            $new_info = "Generic Fantasy Novel";
+
             //Act
-            $new_title = "Generic Fantasy Novel";
-            $test_book->update($new_title);
+            $test_book->update($column_to_update, $new_info);
 
             //Assert
-            $this->assertEquals($new_title, $test_book->getTitle());
+            $result = Book::getAll();
+            $this->assertEquals("Generic Fantasy Novel", $result[0]->getTitle());
+        }
+
+        function test_updateGenre()
+        {
+            //Arrange
+            $title = "Whimsical Fairytales...and other stories";
+            $genre = "Fantasy";
+            $test_book = new Book($title, $genre);
+            $test_book->save();
+
+            $column_to_update = "genre";
+            $new_info = "Historical Fiction";
+
+            //Act
+            $test_book->update($column_to_update, $new_info);
+
+            //Assert
+            $result = Book::getAll();
+            $this->assertEquals("Historical Fiction", $result[0]->getGenre());
         }
 
         function test_delete()
