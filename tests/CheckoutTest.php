@@ -12,7 +12,7 @@
     $password = 'root';
     $DB = new PDO($server, $username, $password);
 
-    class CheckoutnTest extends PHPUnit_Framework_TestCase
+    class CheckoutTest extends PHPUnit_Framework_TestCase
     {
         protected function tearDown()
         {

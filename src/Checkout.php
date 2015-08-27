@@ -43,7 +43,8 @@
         //database methods
         function save()
         {
-
+            $GLOBALS['DB']->exec("INSERT INTO checkouts (copy_id, patron_id, due_date) VALUES ({$this->getCopyId()}, {$this->getPatronId()}, '{$this->getDueDate()}');");
+            $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
         function update()
@@ -66,12 +67,22 @@
 
         static function getAll()
         {
-
+            $checkouts_query = $GLOBALS['DB']->query("SELECT * FROM checkouts;");
+            $all_checkouts = array();
+            foreach ($checkouts_query as $checkout) {
+                $copy_id = $checkout['copy_id'];
+                $patron_id = $checkout['patron_id'];
+                $due_date = $checkout['due_date'];
+                $id = $checkout['id'];
+                $new_checkout = new Checkout($copy_id, $patron_id, $due_date, $id);
+                array_push($all_checkouts, $new_checkout);
+            }
+            return $all_checkouts;
         }
 
         static function deleteAll()
         {
-
+            $GLOBAL['DB']->exec("DELETE FROM checkouts;");
         }
 
         static function find()
